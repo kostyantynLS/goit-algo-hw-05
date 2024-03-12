@@ -9,7 +9,6 @@
 - Використання рекурсії для обчислення чисел Фібоначчі.
 '''
 
-"""Generate Fibonacci numbers using an internal function to store values."""
 def caching_fibonacci():
     # Initialize the cache with the first two Fibonacci numbers
     cache = [0, 1]
@@ -32,10 +31,3 @@ def caching_fibonacci():
             return fibonacci(n-2)+fibonacci(n-1)
         
     return fibonacci
-
-'''
-fib = caching_fibonacci()
-print(fib(10))
-print(fib(2))
-print(fib(5))
-'''
