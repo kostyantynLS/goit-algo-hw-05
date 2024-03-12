@@ -60,14 +60,14 @@ def filter_logs_by_level(logs: list, level: str) -> list:
             filtered_events.append(event_in_logs)
     return filtered_events
 
-def print_log_table(log_list: list, log_level: str):
-    event_dic = count_logs_by_level(log_list)
+def display_log_counts(counts: dict):
     print('Рівень логування | Кількість\n'
           '-----------------|----------')
-    for event_name, event_count in event_dic.items():
+    for event_name, event_count in counts.items():
         event_string = event_name + " "*(17-len(event_name)) + "| " + str(event_count)
         print(event_string)
 
+def display_log_filtered(log_list: list, log_level: str):
     if log_level>"":
         filtered_list = filter_logs_by_level(log_list, log_level)
         if len(filtered_list)>0:
@@ -94,8 +94,9 @@ def main():
         exit()
 
     log_list = load_logs(log_file)
-
-    print_log_table(log_list, log_level)
+    event_dic = count_logs_by_level(log_list)
+    display_log_counts(event_dic)
+    display_log_filtered(log_list, log_level)
 
 if __name__ == "__main__":
     main()

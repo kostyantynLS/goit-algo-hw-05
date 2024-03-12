@@ -17,13 +17,13 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except ValueError:
-            print(f'{func.__name__} : value error')
+            return(f'{func.__name__} : Enter the argument for the command')
         except TypeError:
-            print(f'{func.__name__} : type error')
+            return(f'{func.__name__} : Enter the argument for the command')
         except KeyError:
-            print(f'{func.__name__} : key error')
+            return(f'{func.__name__} : Enter the argument for the command')
         except Exception as e:
-            print(f'{func.__name__} : undefined exception {e}')
+            return(f'{func.__name__} : Enter the argument for the command')
     return wrapper
 
 @input_error
@@ -32,10 +32,7 @@ def say_hello():
 
 @input_error
 def parse_input(cmd_line:str):
-    max_cmd = 3
     info = cmd_line.split(" ")
-    while len(info)<max_cmd:
-        info.append("")
     info[0] = info[0].strip(" ").lower()
     return info
 
@@ -124,7 +121,7 @@ def main():
         elif cmds[0]=='change':
             print(change_contact(cmds[1:], contacts))
         elif cmds[0]=='phone':
-            print(get_phone(cmds[1], contacts))
+            print(get_phone(cmds[1:], contacts))
         elif cmds[0]=='all':
             us_list = print_contact(contacts)
             for i in us_list:

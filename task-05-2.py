@@ -23,7 +23,7 @@ def generator_numbers(text: str) -> list:
     #  any digits (\d*) until DOT
     #  DOT (\.)
     #  one (\d) or two (|\d) digits arter DOT
-    new_text = re.findall(r"[-+]?\d*\.\d+|\d+", text)
+    new_text = re.findall(r" [-+]?\d*\.\d+|\d+ ", text)
     for digit_in_text in new_text:
         yield float(digit_in_text)
 
