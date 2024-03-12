@@ -30,9 +30,3 @@ def generator_numbers(text: str) -> list:
 def sum_profit(text: str, func: Callable[[str], list]) -> float:
     # Дійсні числа у тексті записані без помилок, чітко відокремлені пробілами з обох боків
     return sum(generator_numbers(text))
-
-'''
-text = "Загальний дохід працівника складається з декількох частин: 1000.01 як основний дохід, доповнений додатковими надходженнями 27.45 і 324.00 доларів."
-total_income = sum_profit(text, generator_numbers)
-print(f"Загальний дохід: {total_income}")
-'''
