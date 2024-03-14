@@ -21,16 +21,20 @@ def input_error(func):
                 return(f'{func.__name__} : use ADD [name] [phone]\nGive me name and phone please')
             elif func.__name__ == "change_contact":
                 return(f'{func.__name__} : use CHANGE [name] [phone]\nGive me name and phone please')
-            else:
-                return(f'{func.__name__} : Enter the argument for the command')
+            return(f'{func.__name__} : Enter the argument for the command')
         except TypeError:
-            if func.__name__ == "get_phone":
+            if func.__name__ == "get_contact":
                 return(f'{func.__name__} : use PHONE [name]\nGive me name please')
-            else:
-                return(f'{func.__name__} : Enter the argument for the command')
+            return(f'{func.__name__} : Enter the argument for the command')
         except KeyError:
+            if func.__name__ == "get_contact":
+                return(f'{func.__name__} : Give me correct name please')
             return(f'{func.__name__} : Enter the argument for the command')
         except Exception as e:
+            if func.__name__ == "get_contact":
+                return(f'{func.__name__} : use PHONE [name]\nGive me name and phone please')
+            elif func.__name__ == "del_contact":
+                return(f'{func.__name__} : use DEL [name]\nGive me name')
             return(f'{func.__name__} : Enter the argument for the command')
     return wrapper
 
@@ -47,8 +51,11 @@ def parse_input(cmd_line:str):
 @input_error
 def add_contact(args, cont) -> str:
     name, phone = args
-    cont[name] = phone
-    return "contact added"
+    if not name in cont:
+        cont[name] = phone
+        return "contact added"
+    else:
+        return "contact already"
 
 @input_error
 def change_contact(args, cont) -> str:
@@ -77,7 +84,8 @@ def print_contact(cont):
     return items
 
 @input_error
-def get_phone(name, cont):
+def get_contact(args, cont):
+    name = args[0]
     s = cont[name]
     return(s)
 
@@ -129,7 +137,7 @@ def main():
         elif cmds[0]=='change':
             print(change_contact(cmds[1:], contacts))
         elif cmds[0]=='phone':
-            print(get_phone(cmds[1:], contacts))
+            print(get_contact(cmds[1:], contacts))
         elif cmds[0]=='all':
             us_list = print_contact(contacts)
             for i in us_list:
