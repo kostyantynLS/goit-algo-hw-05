@@ -32,7 +32,7 @@ def input_error(func):
             return(f'{func.__name__} : Enter the argument for the command')
         except Exception as e:
             if func.__name__ == "get_contact":
-                return(f'{func.__name__} : use PHONE [name]\nGive me name and phone please')
+                return(f'{func.__name__} : use PHONE [name]\nGive me name please')
             elif func.__name__ == "del_contact":
                 return(f'{func.__name__} : use DEL [name]\nGive me name')
             return(f'{func.__name__} : Enter the argument for the command')
@@ -80,7 +80,7 @@ def print_contact(cont):
     items = list()
     if len(cont)>0:
         for names, phones in cont.items():
-            items.append(f'{names},{phones}')
+            items.append(f'{names} : {phones}')
     return items
 
 @input_error
@@ -140,8 +140,8 @@ def main():
             print(get_contact(cmds[1:], contacts))
         elif cmds[0]=='all':
             us_list = print_contact(contacts)
-            for i in us_list:
-                print(' item: ', i)
+            for line_cont in us_list:
+                print(line_cont)
         elif cmds[0]=='date':
             print(curr_date())
         elif cmds[0]=='time':
