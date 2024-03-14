@@ -67,7 +67,7 @@ def display_log_counts(counts: dict):
         event_string = event_name + " "*(17-len(event_name)) + "| " + str(event_count)
         print(event_string)
 
-def display_log_filtered(log_list: list, log_level: str):
+def filter_logs_by_level(log_list: list, log_level: str):
     if log_level>"":
         filtered_list = filter_logs_by_level(log_list, log_level)
         if len(filtered_list)>0:
@@ -96,7 +96,7 @@ def main():
     log_list = load_logs(log_file)
     event_dic = count_logs_by_level(log_list)
     display_log_counts(event_dic)
-    display_log_filtered(log_list, log_level)
+    filter_logs_by_level(log_list, log_level)
 
 if __name__ == "__main__":
     main()
