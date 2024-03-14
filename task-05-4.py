@@ -18,16 +18,14 @@ def input_error(func):
             return func(*args, **kwargs)
         except ValueError:
             if func.__name__ == "add_contact":
-                return(f'{func.__name__} : use ADD [name] [phone]')
-            if func.__name__ == "change_contact":
-                return(f'{func.__name__} : use CHANGE [name] [phone]')
+                return(f'{func.__name__} : use ADD [name] [phone]\nGive me name and phone please')
             elif func.__name__ == "change_contact":
-                return(f'{func.__name__} : use CHANGE [name] [phone]')
+                return(f'{func.__name__} : use CHANGE [name] [phone]\nGive me name and phone please')
             else:
                 return(f'{func.__name__} : Enter the argument for the command')
         except TypeError:
             if func.__name__ == "get_phone":
-                return(f'{func.__name__} : use PHONE [name]')
+                return(f'{func.__name__} : use PHONE [name]\nGive me name please')
             else:
                 return(f'{func.__name__} : Enter the argument for the command')
         except KeyError:
